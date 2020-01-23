@@ -20,7 +20,7 @@ class _ContactPageState extends State<ContactPage> {
 
   final _nameFocus = FocusNode();
 
-  bool _userEdited = false;
+  bool   = false;
 
   Contact _editedContact;
 
@@ -64,7 +64,7 @@ class _ContactPageState extends State<ContactPage> {
           padding: EdgeInsets.all(10.0),
           child: Column(
             children: <Widget>[
-              Container(
+              pc(
                 width: 140.0,
                 height: 140.0,
                 decoration: BoxDecoration(

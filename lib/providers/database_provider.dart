@@ -2,12 +2,12 @@ import 'dart:async';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
+// Nome dos campos na tabela do banco de dados, por isso são constantes
 final String contactTable = "contactTable";
 final String idColumn = "idColumn";
 final String nameColumn = "nameColumn";
 final String emailColumn = "emailColumn";
 final String phoneColumn = "phoneColumn";
-final String imgColumn = "imgColumn";
 
 class DatabaseProvider {
 
@@ -16,9 +16,8 @@ class DatabaseProvider {
   factory DatabaseProvider() => _instance;
 
   DatabaseProvider.internal();
-
   Database _db;
-
+  
   Future<Database> get db async {
     if(_db != null){
       return _db;
@@ -35,7 +34,7 @@ class DatabaseProvider {
     return await openDatabase(path, version: 1, onCreate: (Database db, int newerVersion) async {
       await db.execute(
         "CREATE TABLE $contactTable($idColumn INTEGER PRIMARY KEY, $nameColumn TEXT, $emailColumn TEXT,"
-            "$phoneColumn TEXT, $imgColumn TEXT)"
+            "$phoneColumn TEXT)"
       );
     });
   }
@@ -49,7 +48,7 @@ class DatabaseProvider {
   Future<Contact> getContact(int id) async {
     Database dbContact = await db;
     List<Map> maps = await dbContact.query(contactTable,
-      columns: [idColumn, nameColumn, emailColumn, phoneColumn, imgColumn],
+      columns: [idColumn, nameColumn, emailColumn, phoneColumn],
       where: "$idColumn = ?",
       whereArgs: [id]);
     if(maps.length > 0){
@@ -82,16 +81,6 @@ class DatabaseProvider {
     return listContact;
   }
 
-  Future<int> getNumber() async {
-    Database dbContact = await db;
-    return Sqflite.firstIntValue(await dbContact.rawQuery("SELECT COUNT(*) FROM $contactTable"));
-  }
-
-  Future close() async {
-    Database dbContact = await db;
-    dbContact.close();
-  }
-
 }
 
 class Contact {
@@ -100,33 +89,30 @@ class Contact {
   String name;
   String email;
   String phone;
-  String img;
 
   Contact();
 
+  // Construtor que converte os dados de mapa (JSON) para objeto do contato
   Contact.fromMap(Map map){
     id = map[idColumn];
     name = map[nameColumn];
     email = map[emailColumn];
     phone = map[phoneColumn];
-    img = map[imgColumn];
   }
 
+  // Método que transforma o objeto do contato em Mapa (JSON) para armazenar no banco de dados
   Map toMap() {
     Map<String, dynamic> map = {
       nameColumn: name,
       emailColumn: email,
       phoneColumn: phone,
-      imgColumn: img
     };
+
+    // O id pode ser nulo caso o registro esteja sendo criado já que é o banco de dados que 
+    // atribui o ID ao registro no ato de salvar
     if(id != null){
       map[idColumn] = id;
     }
     return map;
-  }
-
-  @override
-  String toString() {
-    return "Contact(id: $id, name: $name, email: $email, phone: $phone, img: $img)";
   }
 }

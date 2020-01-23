@@ -21,6 +21,14 @@ class _HomePageState extends State<HomePage> {
     _getAllContacts();
   }
 
+  void _getAllContacts(){
+    database.getAllContacts().then((list){
+      setState(() {
+        contacts = list;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +44,7 @@ class _HomePageState extends State<HomePage> {
           },
           child: Icon(Icons.add),
           backgroundColor: Colors.blue,
-      ),
+       ),
       body: ListView.builder(
           padding: EdgeInsets.all(10.0),
           itemCount: contacts.length,
@@ -105,44 +113,26 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.all(10.0),
-                      child: FlatButton(
-                        child: Text("Ligar",
-                          style: TextStyle(color: Colors.blue, fontSize: 20.0),
-                        ),
-                        onPressed: (){
-                          launch("tel:${contacts[index].phone}");
-                          Navigator.pop(context);
-                        },
-                      ),
+                    
+                    _optionButton(context, "Ligar", (){
+                        launch("tel:${contacts[index].phone}");
+                        Navigator.pop(context);
+                      },
                     ),
-                    Padding(
-                      padding: EdgeInsets.all(10.0),
-                      child: FlatButton(
-                        child: Text("Editar",
-                          style: TextStyle(color: Colors.blue, fontSize: 20.0),
-                        ),
-                        onPressed: (){
-                          Navigator.pop(context);
-                          _showContactPage(contact: contacts[index]);
-                        },
-                      ),
+
+                    _optionButton(context, "Editar", (){
+                        Navigator.pop(context);
+                        _showContactPage(contact: contacts[index]);
+                      },
                     ),
-                    Padding(
-                      padding: EdgeInsets.all(10.0),
-                      child: FlatButton(
-                        child: Text("Excluir",
-                          style: TextStyle(color: Colors.blue, fontSize: 20.0),
-                        ),
-                        onPressed: (){
-                          database.deleteContact(contacts[index].id);
-                          setState(() {
-                            contacts.removeAt(index);
-                            Navigator.pop(context);
-                          });
-                        },
-                      ),
+
+                    _optionButton(context, "Excluir", (){
+                        database.deleteContact(contacts[index].id);
+                        setState(() {
+                          contacts.removeAt(index);
+                          Navigator.pop(context);
+                        });
+                      },
                     ),
                   ],
                 ),
@@ -151,6 +141,18 @@ class _HomePageState extends State<HomePage> {
           );
         }
     );
+  }
+
+  Widget _optionButton(BuildContext context, title, pressedFunction) {
+    return Padding(
+            padding: EdgeInsets.all(10.0),
+            child: FlatButton(
+              child: Text(title,
+                style: TextStyle(color: Colors.blue, fontSize: 20.0),
+              ),
+              onPressed: pressedFunction
+            ),
+          );
   }
 
   void _showContactPage({Contact contact}) async {
@@ -165,13 +167,5 @@ class _HomePageState extends State<HomePage> {
       }
       _getAllContacts();
     }
-  }
-
-  void _getAllContacts(){
-    database.getAllContacts().then((list){
-      setState(() {
-        contacts = list;
-      });
-    });
   }
 }
