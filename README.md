@@ -7,7 +7,7 @@ This code was created for my flutter book entitled
 :point_right: If you want to know my book, you can know more by
 [clicking here](https://www.casadocodigo.com.br/products/livro-flutter)
 
-Não manja bem de inglês? [leia em portugês aqui](https://github.com/Leomhl/flutterbook_agenda/blob/master/README_PT.md)
+:brazil: Não manja bem de inglês? [leia em portugês aqui](https://github.com/Leomhl/flutterbook_agenda/blob/master/README_PT.md)
 
 
 ![Image](example.gif)

@@ -8,6 +8,6 @@ Este código foi criado para o meu livro entitulado
 :point_right: Se você quer saber mais sobre o meu livro
 [click aqui](https://www.casadocodigo.com.br/products/livro-flutter)
 
-Quer ler a versão em inglês? [click aqui](https://github.com/Leomhl/flutterbook_agenda/blob/master/README.md)
+:us: Quer ler a versão em inglês? [click aqui](https://github.com/Leomhl/flutterbook_agenda/blob/master/README.md)
 
 ![Image](example.gif)
