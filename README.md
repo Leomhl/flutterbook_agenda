@@ -1,16 +1,13 @@
-# agenda
+### Agenda contacts example made with Flutter framework 
 
-A new Flutter project.
+This code was created for my flutter book entitled 
+"Iniciando com Flutter Framework, desenvolva aplicações móveis no Dart Side!
+" published by publisher casa do código.  :nerd_face::nerd_face::nerd_face:
 
-## Getting Started
+:point_right: If you want to know my book, you can know more by
+[clicking here](https://www.casadocodigo.com.br/products/livro-flutter)
 
-This project is a starting point for a Flutter application.
+Não manja bem de inglês? [leia em portugês aqui](https://github.com/Leomhl/flutterbook_agenda/blob/master/README_PT.md)
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![Image](example.gif)
