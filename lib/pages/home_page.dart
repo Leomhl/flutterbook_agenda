@@ -12,7 +12,7 @@ class _HomePageState extends State<HomePage> {
 
   DatabaseProvider database = DatabaseProvider();
 
-  List<Contact> contacts = List();
+  List<Contact> contacts = [];
 
   @override
   void initState() {
@@ -146,7 +146,7 @@ class _HomePageState extends State<HomePage> {
   Widget _optionButton(BuildContext context, title, pressedFunction) {
     return Padding(
             padding: EdgeInsets.all(10.0),
-            child: FlatButton(
+            child: ElevatedButton(
               child: Text(title,
                 style: TextStyle(color: Colors.blue, fontSize: 20.0),
               ),

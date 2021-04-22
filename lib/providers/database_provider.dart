@@ -74,7 +74,7 @@ class DatabaseProvider {
   Future<List> getAllContacts() async {
     Database dbContact = await db;
     List listMap = await dbContact.rawQuery("SELECT * FROM $contactTable");
-    List<Contact> listContact = List();
+    List<Contact> listContact = [];
     for(Map m in listMap){
       listContact.add(Contact.fromMap(m));
     }
